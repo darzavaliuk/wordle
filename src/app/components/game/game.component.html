@@ -1,0 +1,29 @@
+<div class="jumbotron bg-dark text-white p-5 mb-2">
+  <div class="container"><h1 class="display-4">Wordle</h1></div>
+</div>
+<ng-container *ngIf="!stopGame">
+  <div class="row mb-4 fs-2" *ngFor="let j of [0, 1, 2, 3, 4, 5]">
+    <div id={{j}} class="col d-flex align-items-center justify-content-center" *ngFor="let i of [0, 1, 2, 3, 4, 5]"
+         style="padding: 0;">
+      <input [maxLength]="1" style="max-width: 50px;" type="text" [id]="j * 6 + i" (change)="checkInput($event)"
+             [style.background-color]="inputColor[j * 6 + i]" [readOnly]="!(attempt === j)"
+      />
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="stopGame && isWinner">
+  <div class="container m-2">
+    <h1> You`re the winner</h1>
+    <h3>The word was {{word}}</h3>
+    <h3>Attempts: {{attempt}}</h3>
+  </div>
+</ng-container>
+<ng-container *ngIf="stopGame && !isWinner">
+  <div class="container m-2">
+    <h3>The word was {{word}}</h3>
+    <h3>Attempts: {{attempt}}</h3>
+  </div>
+</ng-container>
+<footer class="bg-dark py-3 text-white">
+  <div class="container"><p class="text-center">Copyright &copy; Game Website 2023</p></div>
+</footer>
